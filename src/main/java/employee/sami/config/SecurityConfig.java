@@ -40,7 +40,7 @@ public class SecurityConfig {
                 // 3. Define request authorization rules
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints (e.g., user login, auth endpoints)
-                        .requestMatchers("/auth/**", "/Employees/login").permitAll()
+                        .requestMatchers("/auth/**", "/Employees/login","/Employees/createEmployee").permitAll()
                         // Require authentication for all other employee management endpoints
                         .requestMatchers("/Employees/**").authenticated()
                         .anyRequest().authenticated()
