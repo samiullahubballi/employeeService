@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
@@ -26,6 +26,10 @@ jobs:
           docker build -t employee-service:${{ github.sha }} .
           docker tag employee-service:${{ github.sha }} employee-service:latest
 
-      - name: Validate Kubernetes Manifests
-        run: |
-          kubectl apply --dry-run=client --validate=false -f k8s/
+      - name: Validate Kubernetes Manifests (Offline)
+        uses: bmuschko/setup-kubeconform@v1
+        with:
+          kubeconform-version: '0.6.7'
+
+      - name: Run Kubeconform Validation
+        run: kubeconform -summary -strict k8s/
