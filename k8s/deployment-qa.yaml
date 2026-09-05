@@ -22,7 +22,7 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://host.docker.internal:5432/employeeManagemenQA"
+              value: "jdbc:postgresql://host.docker.internal:5432/employeeManagementQA"
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
